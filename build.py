@@ -43,6 +43,9 @@ def parse_chapter_file(filepath):
     # 去掉 "下章预告" 段落
     content = re.sub(r'\n下章预告：.*$', '', content, flags=re.DOTALL)
 
+    # 去掉弧段总结元信息（【弧段X「...」完结】及其后的总结块）
+    content = re.sub(r'\n\*?\*?【弧段.+?完结】\*?\*?\n.*$', '', content, flags=re.DOTALL)
+
     # 提取标题
     title_match = re.search(r'^# (.+)$', content, re.MULTILINE)
     if title_match:
